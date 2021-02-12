@@ -1,24 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 
 import Api from '../Api';
 
-import ExpandIcon from  '../assets/expand.svg';
-
+import ExpandIcon from '../assets/expand.svg';
 import NavPrevIcon from '../assets/nav_prev.svg';
 import NavNextIcon from '../assets/nav_next.svg';
-import { TouchableOpacity } from 'react-native';
-import { useState } from 'react/cjs/react.development';
 
 const Modal = styled.Modal``;
+
 const ModalArea = styled.View`
-    flex:1
-    background-color: rgba(0, 0, 0, 0.5);
+    flex: 1;
+    background-color: rgba(0,0,0, 0.5);
     justify-content: flex-end;
 `;
+
 const ModalBody = styled.View`
-    background-color: #FFFFFF;
+    background-color: #2196F3;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     min-height: 300px;
@@ -31,47 +30,46 @@ const CloseButton = styled.TouchableOpacity`
 `;
 
 const ModalItem = styled.View`
-    border: 2px solid #2196F3;
+    background-color: #FFFFFF;
     border-radius: 10px;
     margin-bottom: 15px;
     padding: 10px;
 `;
-
 const UserInfo = styled.View`
     flex-direction: row;
     align-items: center;
 `;
-
 const UserAvatar = styled.Image`
     width: 56px;
     height: 56px;
     border-radius: 20px;
     margin-right: 15px;
-`;
 
+`;
 const UserName = styled.Text`
     color: #000000;
     font-size: 18px;
-
+    font-weight: bold;
 `;
 
 const FinishButton = styled.TouchableOpacity`
-    background-color: #2196F3;
+    background-color: #7cb342;
     height: 60px;
     justify-content: center;
     align-items: center;
-    border-radius: 6px;
+    border-radius: 10px;
 `;
+
 const FinishButtonText = styled.Text`
-    color:#FFFFFF;
+    color: #FFFFFF;
     font-size: 17px;
     font-weight: bold;
 `;
 
 const DateInfo = styled.View`
     flex-direction: row;
-
 `;
+
 const DatePrevArea = styled.TouchableOpacity`
     flex: 1;
     justify-content: flex-end;
@@ -88,12 +86,11 @@ const DateTitle = styled.Text`
     color: #000000;
 `;
 const DateNextArea = styled.TouchableOpacity`
-    flex: 1;
-    align-items: flex-start;
+    flex:1;
+    align-items: flex-start
 `;
 
-const DateList = styled.ScrollView`
-`;
+const DateList = styled.ScrollView``;
 
 const DateItem = styled.TouchableOpacity`
     width: 45px;
@@ -115,7 +112,6 @@ const DateItemNumber = styled.Text`
 `;
 
 const TimeList = styled.ScrollView``;
-
 const TimeItem = styled.TouchableOpacity`
     width: 75px;
     height: 40px;
@@ -123,11 +119,9 @@ const TimeItem = styled.TouchableOpacity`
     align-items: center;
     border-radius: 10px;
 `;
-
 const TimeItemText = styled.Text`
     font-size: 16px;
 `;
-
 
 const months = [
     'Janeiro',
@@ -152,36 +146,37 @@ const days = [
     'Qui',
     'Sex',
     'Sab'
-]
+];
 
-export default ({ show, setShow, user }) => {
+export default ({show, setShow, user}) => {
 
     const navigation = useNavigation();
 
     const [selectedYear, setSelectedYear] = useState(0);
     const [selectedMonth, setSelectedMonth] = useState(0);
     const [selectedDay, setSelectedDay] = useState(0);
-    const [selectedHour, setSelectedHour] = useState(0);
+    const [selectedHour, setSelectedHour] = useState(null);
     const [listDays, setListDays] = useState([]);
     const [listHours, setListHours] = useState([]);
+    
 
     useEffect(()=>{
-        if(user.available){
-            let daysInMonth = new Date(selectedYear, selectedMonth+1, 0).getDate();
+        if(user.available) {
+            let daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
             let newListDays = [];
-            for(let i=1; i<=daysInMonth; i++){
 
+            for(let i=1; i<=daysInMonth; i++){
                 let d = new Date(selectedYear, selectedMonth, i);
                 let year = d.getFullYear();
                 let month = d.getMonth() + 1;
                 let day = d.getDate();
                 month = month < 10 ? '0'+month : month;
-                day = day < 10 ? ''+day : day ;
+                day = day < 10 ? '0'+day : day;
 
-                let selDate = year+'-'+month+'-'+day;
+                let selDate = `${year}-${month}-${day}`;
 
                 let availability = user.available.filter(e=>e.date === selDate);
-
+                
                 newListDays.push({
                     status: availability.length > 0 ? true : false,
                     weekday: days[ d.getDay() ],
@@ -192,32 +187,34 @@ export default ({ show, setShow, user }) => {
             setListDays(newListDays);
             setSelectedDay(0);
             setListHours([]);
-            setSelectedHour(0);
-            }
-        
-    },[user, selectedMonth, selectedYear]);
+            setSelectedHour([]);
+        }
+    }, [user, selectedMonth, selectedYear]);
 
     useEffect(()=>{
-        if( user.available && selectedDay > 0) {
+        if(user.available && selectedDay > 0) {
             let d = new Date(selectedYear, selectedMonth, selectedDay);
             let year = d.getFullYear();
-                let month = d.getMonth() + 1;
-                let day = d.getDate();
-                month = month < 10 ? '0'+month : month;
-                day = day < 10 ? ''+day : day ;
+            let month = d.getMonth() + 1;
+            let day = d.getDate();
+            month = month < 10 ? '0'+month : month;
+            day = day < 10 ? '0'+day : day;
 
-                let selDate = year+'-'+month+'-'+day;
-                let availability = user.available.filter(e=>e.date === selDate);
-                if(availability.length > 0) {
-                    setListHours( availability[0].hours );
-                }
+            let selDate = `${year}-${month}-${day}`;
+
+            let availability = user.available.filter(e=>e.date === selDate);
+
+            if(availability.length > 0) {
+                setListHours( availability[0].hours );
+            }
+
         }
         setSelectedHour(null);
     }, [user, selectedDay]);
 
     useEffect(()=>{
         let today = new Date();
-        setSelectedYear(  today.getFullYear() );
+        setSelectedYear( today.getFullYear() );
         setSelectedMonth( today.getMonth() );
         setSelectedDay( today.getDate() );
     }, []);
@@ -225,21 +222,20 @@ export default ({ show, setShow, user }) => {
     const handleLeftDateClick = () => {
         let mountDate = new Date(selectedYear, selectedMonth, 1);
         mountDate.setMonth( mountDate.getMonth() - 1 );
-        setSelectedYear(mountDate.getFullYear());
-        setSelectedMonth(mountDate.getMonth());
+        setSelectedYear( mountDate.getFullYear() );
+        setSelectedMonth( mountDate.getMonth() );
         setSelectedDay(0);
     }
+
     const handleRightDateClick = () => {
         let mountDate = new Date(selectedYear, selectedMonth, 1);
         mountDate.setMonth( mountDate.getMonth() + 1 );
-        setSelectedYear(mountDate.getFullYear());
-        setSelectedMonth(mountDate.getMonth());
+        setSelectedYear( mountDate.getFullYear() );
+        setSelectedMonth( mountDate.getMonth() );
         setSelectedDay(0);
     }
-    
+
     const handleCloseButton = () => {
-
-
         setShow(false);
     }
 
@@ -250,7 +246,7 @@ export default ({ show, setShow, user }) => {
             selectedMonth > 0 &&
             selectedDay > 0 &&
             selectedHour != null
-        ) {
+        ){
             let res = await Api.setAppointment(
                 user.id,
                 selectedYear,
@@ -258,24 +254,19 @@ export default ({ show, setShow, user }) => {
                 selectedDay,
                 selectedHour
             );
-            if(res.error == '') {
+            if(res.error == ''){
                 setShow(false);
                 navigation.navigate('Appointments');
-            }else {
-              
+            } else {
                 alert(res.error);
             }
-            setShow(false);
-
-        }else {
+        }else{
             alert('Preencha todos os dados ');
         }
-
     }
 
-
     return (
-        <Modal 
+        <Modal
             transparent={true}
             visible={show}
             animationType="slide"
@@ -283,8 +274,9 @@ export default ({ show, setShow, user }) => {
             <ModalArea>
                 <ModalBody>
                     <CloseButton onPress={handleCloseButton}>
-                        <ExpandIcon width="40" heignt="40" fill="#000000" />
+                        <ExpandIcon width="40" height="40" fill="#FFFFFF" />
                     </CloseButton>
+
                     <ModalItem>
                         <UserInfo>
                             <UserAvatar source={{uri: user.avatar}}/>
@@ -298,7 +290,7 @@ export default ({ show, setShow, user }) => {
                                 <NavPrevIcon width="35" height="35" fill="#000000" />
                             </DatePrevArea>
                             <DateTitleArea>
-                                <DateTitle> {months[selectedMonth]} {selectedYear}</DateTitle>
+                                <DateTitle>{months[selectedMonth]} {selectedYear}</DateTitle>
                             </DateTitleArea>
                             <DateNextArea onPress={handleRightDateClick}>
                                 <NavNextIcon width="35" height="35" fill="#000000" />
@@ -324,7 +316,6 @@ export default ({ show, setShow, user }) => {
                                             color: item.number === selectedDay ? '#FFFFFF' : '#000000'
                                         }}
                                     >{item.number}</DateItemNumber>
-
                                 </DateItem>
                             ))}
                         </DateList>
@@ -342,21 +333,21 @@ export default ({ show, setShow, user }) => {
                                     >
                                         <TimeItemText
                                             style={{
-                                                color: item === selectedHour ? '#FFFFFF' : '#000000'
+                                                color: item === selectedHour ? '#FFFFFF' : '#000000',
+                                                fontWeight: item === selectedHour ? 'bold' : 'normal'
                                             }}
                                         >{item}</TimeItemText>
                                     </TimeItem>
                                 ))}
                             </TimeList>
-                        </ModalItem>    
+                        </ModalItem>
                     }
-                    
-
                     <FinishButton onPress={handleFinishClick}>
                         <FinishButtonText>Finalizar Agendamento</FinishButtonText>
                     </FinishButton>
                 </ModalBody>
             </ModalArea>
+           
         </Modal>
     );
 }
