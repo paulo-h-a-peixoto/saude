@@ -19,7 +19,7 @@ export default () => {
     const [list, setList] = useState([]);
 
     useEffect(()=>{
-        getAppointments();
+       getAppointments();
     }, []);
 
     const getAppointments = async () => {
@@ -27,6 +27,7 @@ export default () => {
         setList([]);
 
         let res = await Api.getAppointments();
+        
         if(res.error == '') {
             setList(res.list);
         } else {
@@ -42,7 +43,9 @@ export default () => {
                     <HeaderTitle numberOfLines={2}>Meus Agendamentos</HeaderTitle>
                 </HeaderArea>
             
-            <Scroller >
+                <Scroller refreshControl={
+                <RefreshControl refreshing={loading} onRefresh={getAppointments} />
+            }>
 
                 {!loading && list.length === 0 &&
                     <EmptyWarning>Não há agendamentos.</EmptyWarning>
@@ -50,7 +53,7 @@ export default () => {
 
                 <ListArea>
                     {list.map((item, k)=>(
-                        <AppointmentItem key={k} data={item} />
+                        <AppointmentItem key={k} data={item}/>
                     ))}
                 </ListArea>
             </Scroller>

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+import Api from '../Api';
+
 const Area = styled.View`
     background-color: #FFFFFF;
     padding: 15px;
@@ -43,23 +45,53 @@ const DateText = styled.Text`
     background-color: #2196F3;
 `;
 
+const ButtonArea = styled.TouchableOpacity`
+   
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #ff492d;
+    padding: 10px;
+`;
+
+const ButtonAreaText = styled.Text`
+    color: #FFFFFF;
+    font-size: 16px;
+`;
+
 export default ({data}) => {
-
+    
     let d = data.datetime.split(' ');
-
+    
     // Tempo
     let time = d[1].substring(0,5);
-
+    
     // Data
     let date = new Date(d[0]);
+    
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-
+    
+    day++;
+    
     month = month < 10 ? '0'+month : month;
     day = day < 10 ? '0'+day : day;
     let dateString = `${day}/${month}/${year}`;
 
+    const handleCheckButton = async (id) => {
+    
+        let res = await Api.deleteAppointment(id);
+       
+        if(res.error == ''){
+          alert('Agendamento dermarcado, atualize a tela!');
+        } else {
+            alert(res.error);
+        }
+    }
+
+    
     return (
         <Area>
             <UserArea>
@@ -74,6 +106,9 @@ export default ({data}) => {
             <SplitArea>
                 <DateText>{dateString}</DateText>
                 <DateText>{time}</DateText>
+                <ButtonArea onPress={()=>handleCheckButton(data.id)}>
+                    <ButtonAreaText>Desmarcar</ButtonAreaText>
+                </ButtonArea>
             </SplitArea>
         </Area>
     );

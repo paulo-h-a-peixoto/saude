@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text } from 'react-native';
+import { Image } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { Container, CustomButton, CustomButtonText } from './styles';
 import Api from '../../Api';
@@ -16,6 +16,7 @@ export default () => {
     }
     return (
         <Container>
+            <Image source={require('../../assets/val-p.png')} style={{width: 300, height:120}} />
             <CustomButton onPress={handleLogoutClick}>
                 <CustomButtonText >Sair</CustomButtonText>
             </CustomButton>

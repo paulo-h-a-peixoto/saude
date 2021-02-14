@@ -27,14 +27,14 @@ export default {
         const json = await req.json();        
         return json;
     },
-    signUp: async (name, cpf, password, zipcode, address, birthday) => {
+    signUp: async (name, cpf, password, zipcode, address, birthday, tell) => {
         const req = await fetch(`${BASE_API}/user`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name, cpf, password, zipcode, address, birthday})
+            body: JSON.stringify({name, cpf, password, zipcode, address, birthday, tell})
         });
         const json = await req.json();        
         return json;
@@ -121,6 +121,22 @@ export default {
         const token = await AsyncStorage.getItem('token');
         const req = await fetch(`${BASE_API}/user/appointments?token=${token}`);
         const json = await req.json();
+        return json;
+    },
+    deleteAppointment: async (id) => {
+        const token = await AsyncStorage.getItem('token');
+
+        const req = await fetch(`${BASE_API}/user/delappointments/${id}`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                token
+            })
+        });
+        const json = await req.json();        
         return json;
     },
     updateUser: async (body) => {

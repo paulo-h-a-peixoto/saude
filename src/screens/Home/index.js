@@ -20,6 +20,7 @@ export default () => {
         setLoading(true);
         setList([]);
         let res = await Api.getLocalitys();
+        
         if(res.error == '') {
             
             setList(res.list);

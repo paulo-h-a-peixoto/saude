@@ -87,7 +87,7 @@ const DateTitle = styled.Text`
 `;
 const DateNextArea = styled.TouchableOpacity`
     flex:1;
-    align-items: flex-start
+    align-items: flex-start;
 `;
 
 const DateList = styled.ScrollView``;

@@ -35,11 +35,11 @@ export default () => {
             <TextBr></TextBr>
             <Text><TextBold>1° 15/02/2021 a 21/02/2021</TextBold> - Pessoas acima de 60 anos acamados e Pessoas acima de 90 anos.</Text>
             <Text><TextBold>2° 21/02/2021 a 28/02/2021</TextBold> - Pessoas de 84 a 85 anos.</Text>
-            <Text><TextBold>3° 01/03/2021 a 07/03/2021</TextBold> - Pessoas de 84 a 80 anos.</Text>
-            <Text><TextBold>4° 08/03/2021 a 14/03/2021</TextBold> - Pessoas de 79 a 75 anos.</Text>
-            <Text><TextBold>5° 15/03/2021 a 21/03/2021</TextBold> - Pessoas de 74 a 70 anos.</Text>
-            <Text><TextBold>6° 22/03/2021 a 28/03/2021</TextBold> - Pessoas de 69 a 65 anos.</Text>
-            <Text><TextBold>7° 29/03/2021 a 04/03/2021</TextBold> - Pessoas de 64 a 60 anos.</Text>
+            <Text><TextBold>3° 01/03/2021 a 07/03/2021</TextBold> - Pessoas de 80 a 84 anos.</Text>
+            <Text><TextBold>4° 08/03/2021 a 14/03/2021</TextBold> - Pessoas de 75 a 79 anos.</Text>
+            <Text><TextBold>5° 15/03/2021 a 21/03/2021</TextBold> - Pessoas de 70 a 74 anos.</Text>
+            <Text><TextBold>6° 22/03/2021 a 28/03/2021</TextBold> - Pessoas de 65 a 69 anos.</Text>
+            <Text><TextBold>7° 29/03/2021 a 04/03/2021</TextBold> - Pessoas de 60 a 64 anos.</Text>
             <TextBr></TextBr>
             <Text><TextRed>Importante: O cronograma poderá ser alterado de acordo com o andamento.</TextRed></Text>
             <TextBr></TextBr>

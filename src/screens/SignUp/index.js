@@ -28,6 +28,7 @@ export default () => {
     const [cepField, setCepField] = useState('');
     const [enderecoField, SetEnderecoField] = useState('');
     const [dateField, setDateField] = useState('');
+    const [tell, setTell] = useState('');
 
     useEffect(()=>{
         if(dateField.length == 3){
@@ -55,8 +56,8 @@ export default () => {
     }, [cepField]);
 
     const handleSignClick = async () => {
-        if(nameField != '' && cpfField != '' && passwordField != '' && cepField != '' && enderecoField != '' && dateField != ''){
-            let res = await Api.signUp(nameField, cpfField, passwordField, cepField, enderecoField, dateField);
+        if(nameField != '' && cpfField != '' && passwordField != '' && cepField != '' && enderecoField != '' && dateField != '' && tell != ''){
+            let res = await Api.signUp(nameField, cpfField, passwordField, cepField, enderecoField, dateField, tell);
             if(res.token) {
                 await AsyncStorage.setItem('token', res.token);
 
@@ -96,6 +97,13 @@ export default () => {
                     placeholder="Digite seu cpf"
                     value={cpfField}
                     onChangeText={t=>setCpfField(mask(t, ['999.999.999-99']))}
+                    keyboardType="numeric"
+                />
+                <SignInput 
+                    IconSvg={UserIcon}
+                    placeholder="Digite seu telefone com DDD"
+                    value={tell}
+                    onChangeText={t=>setTell(t)}
                     keyboardType="numeric"
                 />
                 <SignInput 
