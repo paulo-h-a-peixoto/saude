@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-    background-color: #FFFFFF;
+    background-color: #ffa500;
     flex: 1;
     justify-content: center;
     align-items: center;
 `;
 
 export const InputArea = styled.View`
-    background-color: #FFFFFF;
+    background-color: #ffa500;
     padding:10px;
     width: 95%;
     margin-top:80px;

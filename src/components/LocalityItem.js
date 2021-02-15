@@ -20,6 +20,7 @@ const InfoArea = styled.View`
     justify-content: space-between;
 `;
 const UserName = styled.Text`
+    width: 200px;
     font-size: 17px;
     font-weight: bold;
 `;
@@ -55,7 +56,7 @@ export default ({data})=>{
             <Avatar source={{uri: data.avatar}}/>
             <InfoArea>
                 <UserName>{data.name}</UserName>
-                <UserName>{data.address}</UserName>
+                <UserName numberOfLines={1}>{data.address}</UserName>
                 <SeeProfileButton>
                     <SeeProfileButtonText>Ver Local</SeeProfileButtonText>
                 </SeeProfileButton>

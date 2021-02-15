@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     flex: 1;
-    background-color: #FFFFFF;
+    background-color: #ffa500;
 `;
 
 
@@ -29,7 +29,7 @@ export const HeaderArea = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #FFFFFF;
+    background-color: #ffa500;
     padding: 30px 30px 0px 30px;
     
     

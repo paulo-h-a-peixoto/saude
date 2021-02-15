@@ -45,7 +45,7 @@ export const FakeSwiper = styled.View`
 `;
 
 export const PageBody = styled.View`
-    background-color: #FFFFFF;
+    background-color: #ffa500;
     border-top-left-radius: 50px;
     margin-top: -50px;
     flex:1;

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     flex:1;
-    background-color: #FFFFFF;
+    background-color: #Ffb444;
 `;
 
 export const Scroller = styled.ScrollView`
@@ -16,7 +16,7 @@ export const HeaderArea = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #FFFFFF;
+    background-color: #Ffb444;
     
     
 `;

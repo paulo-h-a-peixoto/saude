@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import { Container, CustomButton, CustomButtonText } from './styles';
+import { Container, CustomButton, CustomButtonText, NameLogoText } from './styles';
 import Api from '../../Api';
 
 
@@ -20,7 +20,7 @@ export default () => {
             <CustomButton onPress={handleLogoutClick}>
                 <CustomButtonText >Sair</CustomButtonText>
             </CustomButton>
-          
+            <NameLogoText>Imuniza Valparaíso</NameLogoText>
         </Container>
     );
 }
