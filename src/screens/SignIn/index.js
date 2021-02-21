@@ -15,7 +15,8 @@ import {
     SignMessageButtonText,
     SignMessageButtonTextBold,
     Information,
-    InformationText
+    InformationText,
+    Slogan
 } from './styled';
 
 import SignInput from '../../components/SignInput';
@@ -74,17 +75,18 @@ export default () => {
     return (
         <Container>
             <Image source={require('../../assets/val-p.png')} style={{width: 300, height:120}} />
+            <Slogan>Secretaria de Saúde</Slogan>
             <InputArea>
                 <SignInput 
                     IconSvg={UserIcon}
-                    placeholder="Digite seu cpf"
+                    placeholder="Digite seu CPF"
                     value={cpfField}
                     onChangeText={t=>setCpfField(mask(t, ['999.999.999-99']))}
                     keyboardType="numeric"
                 />
                 <SignInput 
                     IconSvg={LockIcon}
-                    placeholder="Digite sua senha"
+                    placeholder="Digite sua SENHA"
                     value={passwordField}
                     onChangeText={t=>setPasswordField(t)}
                     password={true}

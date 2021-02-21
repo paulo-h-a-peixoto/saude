@@ -49,6 +49,24 @@ export const SignMessageButtonTextBold = styled.Text`
     margin-left: 5px;
 `;
 
+export const CheckBoxes = styled.View`
+  
+    width:100%;
+    height: 50px;
+    flex-direction: row;
+    align-items: center;
+    
+    text-decoration-line: none;
+    border-bottom-color: #ccc;
+    border-bottom-width: 3px;
+`;
+
+export const CheckBoxText = styled.Text`
+    margin-left: 8px;
+    font-size: 15px;
+    color: #2196F3;
+`;
+
 /**
  * 
  * InputArea,

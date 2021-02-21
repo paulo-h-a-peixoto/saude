@@ -105,8 +105,7 @@ export default () => {
                         <InfoBody>
                             <InfoTitle>Informações</InfoTitle>
                           
-                                <InfoTb> Telefone (s): <InfoT>(61) 9999 - 9999</InfoT></InfoTb>
-                                <InfoTb> Funcionamento: <InfoT>24 horas</InfoT></InfoTb>
+                                
                                 <InfoTb> Endereço: <InfoT>{userInfo.address}</InfoT></InfoTb>
                            
                         

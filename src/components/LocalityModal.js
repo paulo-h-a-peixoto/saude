@@ -254,6 +254,7 @@ export default ({show, setShow, user}) => {
                 selectedDay,
                 selectedHour
             );
+            console.log('res', res.error);
             if(res.error == ''){
                 setShow(false);
                 navigation.navigate('Appointments');

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshControl } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import {
     Container,
     HeaderArea,
@@ -19,8 +20,10 @@ export default () => {
     const [list, setList] = useState([]);
 
     useEffect(()=>{
-       getAppointments();
+       
     }, []);
+
+    
 
     const getAppointments = async () => {
         setLoading(true);
@@ -36,6 +39,13 @@ export default () => {
 
         setLoading(false);
     }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getAppointments();
+            
+        }, [])
+    );
 
     return (
         <Container>
@@ -53,7 +63,7 @@ export default () => {
 
                 <ListArea>
                     {list.map((item, k)=>(
-                        <AppointmentItem key={k} data={item}/>
+                        <AppointmentItem key={k} data={item} onPressDelete={()=>{getAppointments()}} />
                     ))}
                 </ListArea>
             </Scroller>

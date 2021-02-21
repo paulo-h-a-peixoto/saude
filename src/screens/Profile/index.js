@@ -20,7 +20,7 @@ export default () => {
             <CustomButton onPress={handleLogoutClick}>
                 <CustomButtonText >Sair</CustomButtonText>
             </CustomButton>
-            <NameLogoText>Imuniza Valparaíso</NameLogoText>
+            <NameLogoText>Vacina Val</NameLogoText>
         </Container>
     );
 }

@@ -66,6 +66,12 @@ export const InformationText = styled.Text`
     font-family: 'Open Sans';
 `;
 
+export const Slogan = styled.Text`
+    color: #5c5c5c;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 20px;`;
+
 /**
  * 
  * InputArea,

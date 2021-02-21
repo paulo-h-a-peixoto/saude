@@ -17,6 +17,7 @@ export default () => {
     
 
     useEffect(()=>{
+       
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('token');
             if(token) {
@@ -30,6 +31,7 @@ export default () => {
                             avatar: res.data.avatar
                         }
                     });
+                    
                     navigation.reset({
                         routes: [{name: 'MainTab'}]
                     });

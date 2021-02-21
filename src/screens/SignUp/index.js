@@ -3,6 +3,7 @@ import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { mask } from 'remask';
 import AsyncStorage from '@react-native-community/async-storage';
+import CheckBox from '@react-native-community/checkbox';
 import Api from '../../Api';
 import { UserContext } from '../../contexts/UserContext';
 import {
@@ -12,7 +13,9 @@ import {
     CustomButtonText,
     SignMessageButton,
     SignMessageButtonText,
-    SignMessageButtonTextBold
+    SignMessageButtonTextBold,
+    CheckBoxes,
+    CheckBoxText
 } from './styled';
 
 import SignInput from '../../components/SignInput';
@@ -29,6 +32,7 @@ export default () => {
     const [enderecoField, SetEnderecoField] = useState('');
     const [dateField, setDateField] = useState('');
     const [tell, setTell] = useState('');
+    const [isSelected, setIsSelected] = useState(false);
 
     useEffect(()=>{
         if(dateField.length == 3){
@@ -57,7 +61,14 @@ export default () => {
 
     const handleSignClick = async () => {
         if(nameField != '' && cpfField != '' && passwordField != '' && cepField != '' && enderecoField != '' && dateField != '' && tell != ''){
-            let res = await Api.signUp(nameField, cpfField, passwordField, cepField, enderecoField, dateField, tell);
+            let profissional = '';
+            if(isSelected){
+                profissional = '1';
+            }else{
+                profissional = '0';
+            }
+            let res = await Api.signUp(nameField, cpfField, passwordField, cepField, enderecoField, dateField, tell, profissional);
+            
             if(res.token) {
                 await AsyncStorage.setItem('token', res.token);
 
@@ -71,7 +82,11 @@ export default () => {
                 navigation.reset({
                     routes:[{name:'MainTab'}]
                 });
+            }else{
+                print(res.error);
             }
+        }else{
+            alert('Preencha todos os campos!');
         }
     }   
 
@@ -114,9 +129,19 @@ export default () => {
                     keyboardType="numeric"
                 />
 
+                <CheckBoxes>
+                    <CheckBox
+                        disabled={false}
+                        value={isSelected}
+                        tintColors={{ true: '#2196F3' }}
+                        onValueChange={() => setIsSelected(!isSelected)}
+                    />
+                    <CheckBoxText>Profissional da Saúde ?</CheckBoxText>
+                </CheckBoxes>
+
                 <SignInput 
                     IconSvg={UserIcon}
-                    placeholder="Digite sua cep"
+                    placeholder="Digite seu cep"
                     value={cepField}
                     onChangeText={t=>setCepField(t)}
                     keyboardType="numeric"

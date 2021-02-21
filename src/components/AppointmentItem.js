@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-
 import Api from '../Api';
+import { useNavigation } from '@react-navigation/native';
 
 const Area = styled.View`
     background-color: #FFFFFF;
@@ -61,7 +61,7 @@ const ButtonAreaText = styled.Text`
 `;
 
 export default ({data}) => {
-    
+    const navigation = useNavigation();
     let d = data.datetime.split(' ');
     
     // Tempo
@@ -85,7 +85,12 @@ export default ({data}) => {
         let res = await Api.deleteAppointment(id);
        
         if(res.error == ''){
-          alert('Agendamento dermarcado, atualize a tela!');
+            
+          alert('Agendamento desmarcado com sucesso!');
+          navigation.reset({
+            routes:[{name:'Appointments'}]
+        });
+          
         } else {
             alert(res.error);
         }
@@ -106,7 +111,7 @@ export default ({data}) => {
             <SplitArea>
                 <DateText>{dateString}</DateText>
                 <DateText>{time}</DateText>
-                <ButtonArea onPress={()=>handleCheckButton(data.id)}>
+                <ButtonArea onPress={()=>handleCheckButton(data.id) }>
                     <ButtonAreaText>Desmarcar</ButtonAreaText>
                 </ButtonArea>
             </SplitArea>
